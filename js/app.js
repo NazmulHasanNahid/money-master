@@ -20,3 +20,6 @@ function calculate(){
     document.getElementById('balance').innerText = balance;
     document.getElementById('total-expense').innerText =  calculateTotal  ;
 }
+
+//parcentage calculate
+
