@@ -57,14 +57,13 @@ function parcentage(){
     
         const remainingBalance = balance - parcentage ;
         document.getElementById('remaing-balance').innerText = remainingBalance ;
-        document.getElementById('error').innerText= "Sucessfull"
         
         
         
         
     }
     else{
-        document.getElementById('error').innerText= "Please enter positive value"
+      alert('please enter positive value')
     }
 
 
