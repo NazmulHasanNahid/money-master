@@ -1,71 +1,111 @@
-document.getElementById('calculate-button').addEventListener('click' , function(){
-   
-    calculate()
-   
-})
+//all id 
+const income = document.getElementById("income");
+const food = document.getElementById("food");
+const rent = document.getElementById("rent");
+const cloth = document.getElementById("cloth");
+const save = document.getElementById("save");
+const savingAccount = document.getElementById("savingAccount");
+const totalExpenses = document.getElementById("totalExpenses");
+const balance = document.getElementById("balance");
+const remainingBalance = document.getElementById("remainingBalance");
 
-document.getElementById('save-button').addEventListener('click' , function(){
-    parcentage()
-})
+function calculate() {
+  let incomeBlance = parseFloat(income.value);
+  let foodCost = parseFloat(food.value);
+  let rentCost = parseFloat(rent.value);
+  let clothCost = parseFloat(cloth.value);
+  let totalCost = foodCost + rentCost + clothCost;
+
+  errorCheck = errorHandle(incomeBlance,foodCost,rentCost,clothCost,totalCost);
+  if (errorCheck == true) {
+    //==Calculate total Expenses Cost
+    totalExpenses.innerText = totalCost;
+    let balanceResult = incomeBlance - totalCost;
+    balance.innerText = balanceResult;
+  }
+}
 
 
+//clear input field
+income.addEventListener("focus", () => {
+  income.value = "";
+  valueEmpty();
+});
+food.addEventListener("focus", () => {
+  food.value = "";
+  valueEmpty();
+});
+rent.addEventListener("focus", () => {
+  rent.value = "";
+  valueEmpty();
+});
+cloth.addEventListener("focus", () => {
+  cloth.value = "";
+  valueEmpty();
+});
+save.addEventListener("focus", () => {
+  save.value = "";
+  savingAccount.innerText = "0";
+  remainingBalance.innerText = "0";
+});
 
-function calculate(){
-    if(income.value && food.value && rent.value && clothes.value !== ''){
+function valueEmpty() {
+  totalExpenses.innerText = "0";
+  balance.innerText = "0";
+  savingAccount.innerText = "0";
+  remainingBalance.innerText = "0";
+}
 
-        const incomeText = document.getElementById('income').value;
-        const income = parseFloat(incomeText)
-        
-        
-        //expense
-        const food = document.getElementById('food').value
-        const rent = document.getElementById('rent').value
-        const clothes  = document.getElementById('clothes').value
-       
-        //calculate
-        const calculateTotal = parseFloat(food) + parseFloat(rent) + parseFloat(clothes)
-        //calculate balance
-        const balance = income - calculateTotal ; 
-        document.getElementById('balance').innerText = balance;
-        document.getElementById('total-expense').innerText =  calculateTotal  ;
-       
-    }
-    else{
-        alert('Please Fillup All The Filed')
-    }
-    
-    
+//save & remaining calculations
+function saveAmount() {
+  let incomeBlance = parseFloat(income.value);
+  let savePersentage = parseInt(save.value);
+  let duebalance = parseFloat(balance.innerText);
+
+  percentageResult = savePersentage / 100;
+  result = incomeBlance * percentageResult;
+  saveings = result;
+  remainingTotalBalance = duebalance - saveings;
+
+  errorCheck = saveError(duebalance, saveings, savePersentage);
+  if (errorCheck == true) {
+    savingAccount.innerText = saveings;
+    remainingBalance.innerText = remainingTotalBalance;
+  }
 }
 
 
 
-//parcentage calculate
-function parcentage(){
-    const incomeText = document.getElementById('income').value;
-    const income = parseFloat(incomeText)
-   
-
-    const saveInputText = document.getElementById('save-input').value ;
-    const saveinput = parseFloat(saveInputText)
-    
-
-    if(saveInputText > 0){
-        const parcentage = (income * saveinput)/100 ;
-        document.getElementById('saving-amount').innerText =  parcentage ;
-        const balanceText = document.getElementById('balance').innerText;
-        const balance = parseFloat(balanceText);
-    
-        const remainingBalance = balance - parcentage ;
-        document.getElementById('remaing-balance').innerText = remainingBalance ;
-        
-        
-        
-        
-    }
-    else{
-      alert('please enter positive value')
-    }
-
-
+// error handler function
+function errorHandle(incomeBlance, foodCost, rentCost, clothCost, totalCost) {
+  if (incomeBlance < 0 || isNaN(incomeBlance)) {
+    alert("Please En");
+    return false;
+  } else if (foodCost < 0 || isNaN(foodCost)) {
+    alert("Please Inter positive Value..!");
+    return false;
+  } else if (rentCost < 0 || isNaN(rentCost)) {
+    alert("Please Inter positive Value..!");
+    return false;
+  } else if (clothCost < 0 || isNaN(clothCost)) {
+    alert("Please Inter positive Value..!");
+    return false;
+  } else if (incomeBlance < totalCost) {
+    alert("Sorry Insufficient Balance");
+    return false;
+  }
+  return true;
 }
 
+// Save Ammout And remaing Ammout Error Handle Function
+function saveError(duebalance, saveings, savePersentage) {
+  //error Handle
+  if (duebalance < saveings) {
+    alert("Your balance not Enough to Save");
+    return false;
+  } else if (savePersentage < 0 || isNaN(savePersentage)) {
+    alert("Please Enter Positive value ");
+    return false;
+  }
+  return true;
+}
