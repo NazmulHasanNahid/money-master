@@ -9,25 +9,32 @@ document.getElementById('save-button').addEventListener('click' , function(){
 })
 
 
+
 function calculate(){
+    if(income.value && food.value && rent.value && clothes.value !== ''){
+
+        const incomeText = document.getElementById('income').value;
+        const income = parseFloat(incomeText)
+        
+        
+        //expense
+        const food = document.getElementById('food').value
+        const rent = document.getElementById('rent').value
+        const clothes  = document.getElementById('clothes').value
+       
+        //calculate
+        const calculateTotal = parseFloat(food) + parseFloat(rent) + parseFloat(clothes)
+        //calculate balance
+        const balance = income - calculateTotal ; 
+        document.getElementById('balance').innerText = balance;
+        document.getElementById('total-expense').innerText =  calculateTotal  ;
+       
+    }
+    else{
+        alert('Please Fillup All The Filed')
+    }
     
     
-    const incomeText = document.getElementById('income').value;
-    const income = parseFloat(incomeText)
-    console.log(income);
-    
-    //expense
-    const food = document.getElementById('food').value
-    const rent = document.getElementById('rent').value
-    const clothes  = document.getElementById('clothes').value
-   
-    //calculate
-    const calculateTotal = parseFloat(food) + parseFloat(rent) + parseFloat(clothes)
-    //calculate balance
-    const balance = income - calculateTotal ; 
-    document.getElementById('balance').innerText = balance;
-    document.getElementById('total-expense').innerText =  calculateTotal  ;
-   
 }
 
 
