@@ -1,9 +1,17 @@
 document.getElementById('calculate-button').addEventListener('click' , function(){
+   
     calculate()
+   
+})
+
+document.getElementById('save-button').addEventListener('click' , function(){
+    parcentage()
 })
 
 
 function calculate(){
+    
+    
     const incomeText = document.getElementById('income').value;
     const income = parseFloat(incomeText)
     console.log(income);
@@ -19,6 +27,7 @@ function calculate(){
     const balance = income - calculateTotal ; 
     document.getElementById('balance').innerText = balance;
     document.getElementById('total-expense').innerText =  calculateTotal  ;
+   
 }
 
 
@@ -33,16 +42,24 @@ function parcentage(){
     const saveinput = parseFloat(saveInputText)
     
 
-    const parcentage = (income * saveinput)/100 ;
-    document.getElementById('saving-amount').innerText =  parcentage ;
-    const balanceText = document.getElementById('balance').innerText;
-    const balance = parseFloat(balanceText);
+    if(saveInputText > 0){
+        const parcentage = (income * saveinput)/100 ;
+        document.getElementById('saving-amount').innerText =  parcentage ;
+        const balanceText = document.getElementById('balance').innerText;
+        const balance = parseFloat(balanceText);
+    
+        const remainingBalance = balance - parcentage ;
+        document.getElementById('remaing-balance').innerText = remainingBalance ;
+        document.getElementById('error').innerText= "Sucessfull"
+        
+        
+        
+        
+    }
+    else{
+        document.getElementById('error').innerText= "Please enter positive value"
+    }
 
-    const remainingBalance = balance - parcentage ;
-    document.getElementById('remaing-balance').innerText = remainingBalance ;
 
 }
 
-document.getElementById('save-button').addEventListener('click' , function(){
-    parcentage()
-})
