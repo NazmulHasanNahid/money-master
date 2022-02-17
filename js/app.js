@@ -21,5 +21,28 @@ function calculate(){
     document.getElementById('total-expense').innerText =  calculateTotal  ;
 }
 
-//parcentage calculate
 
+
+//parcentage calculate
+function parcentage(){
+    const incomeText = document.getElementById('income').value;
+    const income = parseFloat(incomeText)
+   
+
+    const saveInputText = document.getElementById('save-input').value ;
+    const saveinput = parseFloat(saveInputText)
+    
+
+    const parcentage = (income * saveinput)/100 ;
+    document.getElementById('saving-amount').innerText =  parcentage ;
+    const balanceText = document.getElementById('balance').innerText;
+    const balance = parseFloat(balanceText);
+
+    const remainingBalance = balance - parcentage ;
+    document.getElementById('remaing-balance').innerText = remainingBalance ;
+
+}
+
+document.getElementById('save-button').addEventListener('click' , function(){
+    parcentage()
+})
