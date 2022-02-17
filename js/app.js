@@ -18,7 +18,7 @@ function calculate() {
 
   errorCheck = errorHandle(incomeBlance,foodCost,rentCost,clothCost,totalCost);
   if (errorCheck == true) {
-    //==Calculate total Expenses Cost
+    //Calculate total Expenses Cost
     totalExpenses.innerText = totalCost;
     let balanceResult = incomeBlance - totalCost;
     balance.innerText = balanceResult;
@@ -79,7 +79,7 @@ function saveAmount() {
 // error handler function
 function errorHandle(incomeBlance, foodCost, rentCost, clothCost, totalCost) {
   if (incomeBlance < 0 || isNaN(incomeBlance)) {
-    alert("Please En");
+    alert("Please Enter positive value");
     return false;
   } else if (foodCost < 0 || isNaN(foodCost)) {
     alert("Please Inter positive Value..!");
